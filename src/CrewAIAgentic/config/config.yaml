@@ -1,0 +1,3 @@
+usecase: financial_market 
+llm: groq 
+groq_model: llama3-8b-8192 
