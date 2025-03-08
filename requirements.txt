@@ -3,3 +3,6 @@ streamlit
 plotly
 yfinance
 pyyaml
+pywin32
+crewai
+crewai-tools
