@@ -1,4 +1,4 @@
- ---
+---
 title: CrewAIAgentic
 emoji: 🐠
 colorFrom: purple
