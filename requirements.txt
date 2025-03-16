@@ -6,3 +6,4 @@ pyyaml
 pywin32
 crewai
 crewai-tools
+duckduckgo-search

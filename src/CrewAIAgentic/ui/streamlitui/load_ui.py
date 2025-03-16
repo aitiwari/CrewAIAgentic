@@ -15,7 +15,7 @@ class LoadStreamlitUI:
             
         if 'inputs' not in st.session_state:
             st.session_state.inputs = {'user_message': ''}
-        st.session_state.inputs['user_message']
+        # st.session_state.inputs['user_message']
 
 
     def load_streamlit_ui(self):
@@ -46,18 +46,19 @@ class LoadStreamlitUI:
                     st.warning("⚠️ Please enter your GROQ API key to proceed. Don't have one? Refer to https://console.groq.com/keys")
 
             # Use case selection
-            self.user_controls["selected_usecase"] = st.selectbox("Select Usecase", usecase_options)
-        if self.user_controls["selected_usecase"] == "Chatbot with Tool":
-            st.subheader("Chatbot with Tool")
-            with st.sidebar:
-                # Input for API Key
-                api_key = st.text_input("Enter your Serper.dev API Key:", type="password")
-                # Store in session state and environment variable
-                if api_key:
-                    st.session_state.SERPER_API_KEY = api_key
-                    os.environ["SERPER_API_KEY"] = api_key  # Store in environment
-                else:
-                    st.warning("⚠️ Please enter your Serper.dev API key to proceed. Don't have one? [Get it here](https://serper.dev/api-key)")
+            st.session_state["selected_usecase"] = self.user_controls["selected_usecase"] = st.selectbox("Select Usecase", usecase_options)
+        if self.user_controls["selected_usecase"] == "Chatbot":
+            st.subheader("Chatbot")
+            st.rerun()
+            # with st.sidebar:
+            #     # Input for API Key
+            #     api_key = st.text_input("Enter your Serper.dev API Key:", type="password")
+            #     # Store in session state and environment variable
+            #     if api_key:
+            #         st.session_state.SERPER_API_KEY = api_key
+            #         os.environ["SERPER_API_KEY"] = api_key  # Store in environment
+            #     else:
+            #         st.warning("⚠️ Please enter your Serper.dev API key to proceed. Don't have one? [Get it here](https://serper.dev/api-key)")
                     
 
 
@@ -67,3 +68,28 @@ class LoadStreamlitUI:
             if user_message:
                 # Store user message in session state
                 st.session_state.inputs['user_message'] = user_message
+            else :
+                st.session_state.inputs['user_message'] = ''
+                
+        elif self.user_controls["selected_usecase"] == "NearbyEase" :
+            st.title("📍 NearbyEase")
+            st.markdown("Find the best nearby services with AI-powered recommendations")
+            
+            # Collect inputs from the user.
+            category = st.selectbox("🔍 Select service category:", 
+                                    ["Restaurant", "Hospital", "Supermarket", "Pharmacy", 
+                                    "Cafe", "Clinic", "Gym", "ATM/Bank", "Gas Station", "Hotel", "Park"])
+            location = st.text_input("🏙️ Enter area name:", placeholder="e.g., Koramangala, Bangalore")
+            user_preferences = st.text_area("💡 Any special requirements?", 
+                                            placeholder="e.g., 'Open now', 'Vegetarian options'...")
+            
+            if st.button("🚀 Find Best Options"):
+                inputs = {
+                    "category": category,
+                    "location": location if location.strip() else "Mumbai India",
+                    "user_preferences": user_preferences,
+                }
+                st.session_state["inputs"] = inputs
+                
+            else:
+                st.session_state["inputs"]=''

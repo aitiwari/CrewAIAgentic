@@ -2,11 +2,12 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import SerperDevTool
 
+
 @CrewBase
 class LatestAiDevelopmentCrew():
     """Latest AI Development Crew"""
 
-    def __init__(self,llm):
+    def __init__(self, llm):
         self.llm = llm
         self.agents_config = 'config/agents.yaml'
         self.tasks_config = 'config/tasks.yaml'
@@ -17,7 +18,8 @@ class LatestAiDevelopmentCrew():
         return Agent(
             config=self.agents_config['researcher'],
             verbose=True,
-            llm=self.llm
+            llm=self.llm,
+            # tools=[SerperDevTool(n_results=1)]
         )
 
     @agent
@@ -50,5 +52,6 @@ class LatestAiDevelopmentCrew():
             process=Process.sequential,
             # memory= st.session_state["chat_with_history"],
             verbose=True,
-            manager_llm=self.llm
+            # max_rpm=1,
+            # manager_llm=self.llm
         )

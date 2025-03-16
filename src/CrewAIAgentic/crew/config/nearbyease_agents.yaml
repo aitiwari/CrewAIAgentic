@@ -1,0 +1,11 @@
+search_agent:
+  role: "Web Search Agent"
+  goal: "Perform a DuckDuckGo search to find the best {category} near {location}. {user_preferences}"
+  backstory: "You are adept at gathering search results quickly from the web."
+  tools: []
+
+analysis_agent:
+  role: "Analysis Agent"
+  goal: "Analyze and summarize search results, scrape webpage content, and generate recommendations."
+  backstory: "You are skilled at using AI to extract key insights from data."
+  tools: []

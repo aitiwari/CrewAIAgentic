@@ -1,0 +1,16 @@
+search_task:
+  description: "Search for the best {category} near {location}. User preferences: {user_preferences}"
+  expected_output: "A list of search results."
+  agent: "search_agent"
+  parameters:
+    max_results: 8
+
+analysis_task:
+  description: "Analyze each search result by scraping its content and generating a summary."
+  expected_output: "A processed list of results with title, URL, and summary."
+  agent: "analysis_agent"
+
+comparison_task:
+  description: "Based on the analyzed results, provide an expert final comparison and recommendation."
+  expected_output: "Markdown formatted expert comparison."
+  agent: "analysis_agent"
